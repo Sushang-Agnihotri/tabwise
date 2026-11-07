@@ -1,0 +1,43 @@
+name: Release
+
+# Publishes a GitHub release with both packages when a version tag (v1.2.3) is pushed.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npm run test:e2e
+        env:
+          CHROME_PATH: /usr/bin/google-chrome
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(node -p "require('./package.json').version")
+          tag="v${version}"
+          if [ "${GITHUB_REF_TYPE}" = "tag" ] && [ "${GITHUB_REF_NAME}" != "${tag}" ]; then
+            echo "Tag ${GITHUB_REF_NAME} does not match package.json version ${version}" >&2
+            exit 1
+          fi
+          if gh release view "$tag" >/dev/null 2>&1; then
+            echo "Release $tag already exists; uploading nothing."
+            exit 0
+          fi
+          notes=$(awk "/^## \[${version}\]/{f=1;next} /^## \[/{f=0} f" CHANGELOG.md)
+          gh release create "$tag" dist/*.zip --title "Tabwise ${version}" --notes "$notes" --target "$GITHUB_SHA"

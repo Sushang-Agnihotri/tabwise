@@ -1,0 +1,34 @@
+body { width: 400px; display: flex; flex-direction: column; max-height: 580px; }
+.top { padding: 12px 12px 8px; display: grid; gap: 8px; border-bottom: 1px solid var(--border); }
+input[type="search"], input[type="text"] {
+  font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 9px 10px; width: 100%;
+}
+input:focus { outline: 2px solid var(--accent); outline-offset: 0; }
+.actions { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.actions .btn { padding: 6px 8px; font-size: 13px; }
+.save-form { display: flex; gap: 6px; }
+.save-form input { flex: 1; padding: 6px 8px; }
+.save-form .btn { padding: 6px 10px; font-size: 13px; }
+.list { list-style: none; margin: 0; padding: 4px 0; overflow-y: auto; flex: 1; min-height: 120px; }
+.win { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); padding: 8px 14px 4px; }
+.tab { display: flex; align-items: center; gap: 10px; padding: 6px 8px 6px 14px; cursor: pointer; border-left: 3px solid transparent; }
+.tab[aria-selected="true"] { background: var(--surface); border-left-color: var(--accent); }
+.tab:hover { background: var(--surface); }
+.tab img, .tab .ph { width: 16px; height: 16px; flex: none; border-radius: 3px; }
+.tab .ph { background: var(--border); display: grid; place-items: center; font-size: 10px; color: var(--muted); }
+.tab .text { flex: 1; min-width: 0; }
+.tab .title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 13px; }
+.tab .url { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11.5px; color: var(--muted); }
+.tab .tag { font-size: 10.5px; color: var(--muted); border: 1px solid var(--border); border-radius: 999px; padding: 0 6px; flex: none; }
+.tab .tag.dup { color: var(--warn); border-color: var(--warn); }
+.tab.current .title { font-weight: 600; }
+.tab.discarded .title, .tab.discarded img { opacity: .6; }
+.tab .close { visibility: hidden; border: 0; background: none; color: var(--muted); font-size: 15px; line-height: 1; padding: 4px 6px; border-radius: 6px; cursor: pointer; }
+.tab:hover .close, .tab[aria-selected="true"] .close { visibility: visible; }
+.tab .close:hover { background: var(--border); color: var(--text); }
+.empty { padding: 24px 14px; color: var(--muted); text-align: center; }
+footer { display: flex; align-items: center; gap: 12px; padding: 8px 12px; border-top: 1px solid var(--border); }
+footer .keys { margin-right: auto; }
+.link { border: 0; background: none; color: var(--accent); cursor: pointer; padding: 2px 0; font-size: 13px; }
+.link:hover { text-decoration: underline; }

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tabwise settings</title>
+  <link rel="stylesheet" href="../ui/common.css">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="page">
+    <header>
+      <img src="../icons/icon-48.png" width="36" height="36" alt="">
+      <div>
+        <h1>Tabwise</h1>
+        <p class="muted small" id="versionLine"></p>
+      </div>
+    </header>
+    <nav aria-label="Sections">
+      <a href="#sessions">Sessions</a>
+      <a href="#duplicates">Duplicates</a>
+      <a href="#suspend">Suspending</a>
+      <a href="#groups" id="groupsNav">Groups</a>
+      <a href="#about">About &amp; privacy</a>
+    </nav>
+
+    <section id="sessions">
+      <h2>Saved sessions</h2>
+      <p class="muted">Reopen a set of tabs later. Autosaves happen every 10 minutes when your tabs change, and the last 5 are kept, so you can recover after a crash.</p>
+      <div class="row">
+        <button class="btn primary" id="saveAll">Save all windows now</button>
+        <button class="btn" id="exportSessions">Export…</button>
+        <label class="btn" for="importFile">Import…</label>
+        <input type="file" id="importFile" accept="application/json,.json" hidden>
+        <span class="small" id="sessionStatus" role="status"></span>
+      </div>
+      <label class="row-check"><input type="checkbox" id="autosave"> Autosave my tabs every 10 minutes</label>
+      <ul class="sessions" id="sessionList"></ul>
+      <p class="muted small" id="noSessions" hidden>No saved sessions yet.</p>
+    </section>
+
+    <section id="duplicates">
+      <h2>Duplicates</h2>
+      <label class="row-check"><input type="checkbox" id="duplicateBadge"> Show the number of duplicate tabs on the toolbar icon</label>
+      <label class="row-check"><input type="checkbox" id="ignoreHash"> Treat links to different parts of the same page (#section) as duplicates</label>
+      <label class="row-field">When I open a page that's already open in another tab
+        <select id="duplicateOnOpen">
+          <option value="nothing">Do nothing</option>
+          <option value="switch">Switch to the existing tab and close the new one</option>
+        </select>
+      </label>
+    </section>
+
+    <section id="suspend">
+      <h2>Suspending</h2>
+      <p class="muted">Suspended tabs stay in your tab strip but are unloaded from memory by the browser. They reload when you click them. Pinned tabs, tabs playing sound and the tab you're looking at are never suspended.</p>
+      <label class="row-check"><input type="checkbox" id="autoSuspend"> Suspend tabs I haven't used for
+        <select id="suspendAfterMinutes" aria-label="Suspend after">
+          <option value="15">15 minutes</option>
+          <option value="30">30 minutes</option>
+          <option value="60">1 hour</option>
+          <option value="120">2 hours</option>
+          <option value="240">4 hours</option>
+          <option value="480">8 hours</option>
+        </select>
+      </label>
+      <h3>Never suspend these sites</h3>
+      <form class="row" id="neverForm">
+        <input type="text" id="neverInput" placeholder="mail.example.com" aria-label="Site to never suspend" spellcheck="false" autocomplete="off">
+        <button class="btn" type="submit">Add</button>
+      </form>
+      <ul class="chips" id="neverList"></ul>
+    </section>
+
+    <section id="groups">
+      <h2>Groups</h2>
+      <label class="row-check"><input type="checkbox" id="autoGroupBySite"> Automatically group tabs from the same site when there are at least
+        <select id="autoGroupMin" aria-label="Minimum tabs">
+          <option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>8</option>
+        </select> of them</label>
+      <h3>Group rules</h3>
+      <p class="muted small">Tabs from these sites always go into the named group, for example put github.com and gitlab.com into "Code".</p>
+      <form class="row" id="ruleForm">
+        <input type="text" id="ruleDomain" placeholder="github.com" aria-label="Site" spellcheck="false" autocomplete="off">
+        <input type="text" id="ruleTitle" placeholder="Group name" aria-label="Group name" maxlength="40">
+        <select id="ruleColor" aria-label="Group colour"></select>
+        <button class="btn" type="submit">Add rule</button>
+      </form>
+      <p class="error small" id="ruleError" hidden></p>
+      <ul class="rules" id="ruleList"></ul>
+      <p class="muted small" id="noGroups" hidden>This browser doesn't support tab groups, so grouping is unavailable.</p>
+    </section>
+
+    <p class="small" id="saveStatus" role="status"></p>
+
+    <section id="about">
+      <h2>About &amp; privacy</h2>
+      <ul class="about">
+        <li><strong>Nothing leaves your device.</strong> Tabwise has no servers, no analytics and no network requests. Saved sessions and settings stay in your browser's local storage.</li>
+        <li><strong>Why it can see your tabs:</strong> searching, finding duplicates and saving sessions need tab titles and addresses. The browser describes this permission as "read your browsing history". Tabwise only reads the tabs you have open.</li>
+        <li><strong>Suspending</strong> uses the browser's own tab discarding, so tabs keep their real address and can't be lost if Tabwise is removed.</li>
+        <li><strong>Shortcut:</strong> press <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>T</kbd> to open tab search. Change it at <code>chrome://extensions/shortcuts</code>.</li>
+      </ul>
+      <p class="small">
+        <a href="https://github.com/Sushang-Agnihotri/tabwise" target="_blank" rel="noopener">Source code</a> ·
+        <a href="https://github.com/Sushang-Agnihotri/tabwise/issues" target="_blank" rel="noopener">Report a problem</a> · MIT License
+      </p>
+    </section>
+  </div>
+  <script type="module" src="options.js"></script>
+</body>
+</html>

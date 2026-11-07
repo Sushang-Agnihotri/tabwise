@@ -1,0 +1,19 @@
+{
+  "name": "tabwise",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smart tab manager: search, duplicates, grouping, suspending and sessions. Private and offline.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test test/",
+    "test:e2e": "node e2e/run.mjs"
+  },
+  "devDependencies": {
+    "puppeteer-core": "^24.43.1"
+  }
+}

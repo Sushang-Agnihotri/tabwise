@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Tabwise</title>
+  <link rel="stylesheet" href="../ui/common.css">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="top">
+    <input type="search" id="q" placeholder="Search tabs…" aria-label="Search tabs" autocomplete="off" spellcheck="false" autofocus>
+    <div class="summary small muted" id="summary" role="status"></div>
+    <div class="actions" id="actions">
+      <button class="btn" id="dupBtn" title="Close tabs that show the same page as another tab">Close duplicates</button>
+      <button class="btn" id="groupBtn" title="Group tabs in this window by website">Group by site</button>
+      <button class="btn" id="suspendBtn" title="Free memory by unloading other tabs in this window. They reload when you click them.">Suspend others</button>
+      <button class="btn" id="saveBtn" title="Save this window's tabs so you can reopen them later">Save session</button>
+    </div>
+    <form class="save-form" id="saveForm" hidden>
+      <input type="text" id="sessionName" placeholder="Session name (optional)" aria-label="Session name" maxlength="80">
+      <button class="btn primary" type="submit">Save</button>
+      <button class="btn" type="button" id="saveCancel">Cancel</button>
+    </form>
+  </div>
+  <ul class="list" id="list" role="listbox" aria-label="Tabs"></ul>
+  <footer>
+    <span class="small muted keys">↑↓ move · Enter open · Del close</span>
+    <button class="link" id="sessionsBtn">Sessions</button>
+    <button class="link" id="settingsBtn">Settings</button>
+  </footer>
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
